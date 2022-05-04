@@ -6,12 +6,12 @@ using namespace std;
 #define MAXSIZE 3
 
 
-//±³°üÎÊÌâ
+//èƒŒåŒ…é—®é¢˜
 int dp[10][100];
 
 void fun(int *w,int *v,int n,int pack)
 {
-	//³õÊ¼»¯±í
+	//åˆå§‹åŒ–è¡¨
 	for (int i = 1; i <= n; i++)
 	{
 		dp[i][0] = 0;
@@ -25,7 +25,7 @@ void fun(int *w,int *v,int n,int pack)
 	for (int i = 1; i <= n; i++)
 	{
 		for (int j = 1; j <= pack; j++)
-		{
+		{å¦‚æœæ­¤ä½ç½®è£…å¾—ä¸‹ï¼Œä¸”ä»·å€¼å¤§äºä¸è£…æ­¤ç¼–å·ç‰©å“çš„è¯
 			if (j >= w[i] && v[i] + dp[i - 1][j - w[i]]>dp[i-1][j])
 			{
 				dp[i][j] = v[i] + dp[i - 1][j - w[i]];
@@ -41,10 +41,10 @@ void fun(int *w,int *v,int n,int pack)
 
 int main()
 {
-	int w[4] = { 0,3,4,5 };//Ã¿¸öÎïÆ·µÄÖØÁ¿
-	int v[4] = { 0,4,5,6 };//Ã¿¸öÎïÆ·µÄ¼ÛÖµ
-	int n = 3;//ÎïÆ·µÄÊıÁ¿
-	int pack = 10;//±³°üÈİÁ¿
+	int w[4] = { 0,3,4,5 };//æ¯ä¸ªç‰©å“çš„é‡é‡
+	int v[4] = { 0,4,5,6 };//æ¯ä¸ªç‰©å“çš„ä»·å€¼
+	int n = 3;//ç‰©å“çš„æ•°é‡
+	int pack = 10;//èƒŒåŒ…å®¹é‡
 	fun(w,v,n,pack);
 	printf("%d", dp[n][pack]);
 }
