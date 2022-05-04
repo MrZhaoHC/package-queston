@@ -3,20 +3,21 @@
 #include<stdlib.h>
 #include<iostream>
 using namespace std;
-#define MAXSIZE 3
+#define n 3    //ÎïÆ·ÊıÁ¿
+#define pack 10   //±³°üÈİÁ¿
 
 
-//èƒŒåŒ…é—®é¢˜
-int dp[10][100];
+//±³°üÎÊÌâ
+int dp[n+1][pack+1];
 
-void fun(int *w,int *v,int n,int pack)
+void fun(int *w,int *v)
 {
-	//åˆå§‹åŒ–è¡¨
-	for (int i = 1; i <= n; i++)
+	//³õÊ¼»¯±í
+	for (int i = 0; i <= n; i++)
 	{
 		dp[i][0] = 0;
 	}
-	for (int i = 1; i <= pack; i++)
+	for (int i =0 ; i <= pack; i++)
 	{
 		dp[0][i] = 0;
 	}
@@ -25,7 +26,7 @@ void fun(int *w,int *v,int n,int pack)
 	for (int i = 1; i <= n; i++)
 	{
 		for (int j = 1; j <= pack; j++)
-		{å¦‚æœæ­¤ä½ç½®è£…å¾—ä¸‹ï¼Œä¸”ä»·å€¼å¤§äºä¸è£…æ­¤ç¼–å·ç‰©å“çš„è¯
+		{
 			if (j >= w[i] && v[i] + dp[i - 1][j - w[i]]>dp[i-1][j])
 			{
 				dp[i][j] = v[i] + dp[i - 1][j - w[i]];
@@ -38,15 +39,28 @@ void fun(int *w,int *v,int n,int pack)
 	}
 }
 
+void result(int* w, int* v)
+{
+	int j = pack;
+	printf("×°ÈëÎïÆ·µÄ±àºÅ: ");
+	for (int i = n; i >= 0; i--)
+	{
+		if (dp[i][j] != dp[i - 1][j])
+		{
+			cout << i << " ";
+			j = j - w[i];
+		}
+	}
+}
+
 
 int main()
 {
-	int w[4] = { 0,3,4,5 };//æ¯ä¸ªç‰©å“çš„é‡é‡
-	int v[4] = { 0,4,5,6 };//æ¯ä¸ªç‰©å“çš„ä»·å€¼
-	int n = 3;//ç‰©å“çš„æ•°é‡
-	int pack = 10;//èƒŒåŒ…å®¹é‡
-	fun(w,v,n,pack);
-	printf("%d", dp[n][pack]);
+	int w[n+1] = { 0,3,4,5 };//Ã¿¸öÎïÆ·µÄÖØÁ¿
+	int v[n+1] = { 0,4,5,6 };//Ã¿¸öÎïÆ·µÄ¼ÛÖµ
+	fun(w,v);
+	printf("×î´ó¼ÛÖµÎª£º%d\n", dp[n][pack]);
+	result(w, v);
 }
 
 
